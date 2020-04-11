@@ -1,6 +1,7 @@
-package edu.neu.coe.info6205.util;
+package edu.neu.coe.info6205.application;
 
-public class Team {
+public class TeamRecord implements Team{
+
 	private String teamName;
 	private int homeMatchesPlayed;
 	private int awayMatchesPlayed;
@@ -13,11 +14,11 @@ public class Team {
 	private double homeDefenseStrength;
 	private double awayDefenseStrength;
 
-	public Team() {
+	public TeamRecord() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Team(String teamName) {
+	public TeamRecord(String teamName) {
 		super();
 		this.teamName = teamName;
 		this.homeMatchesPlayed = 0;
@@ -107,4 +108,5 @@ public class Team {
 	{
 		return this.awayDefenseStrength = avgGoalsConcededAT/avgAwayLeague;
 	}
+	
 }

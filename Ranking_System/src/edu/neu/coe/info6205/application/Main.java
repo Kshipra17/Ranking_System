@@ -12,7 +12,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
-import edu.neu.coe.info6205.util.Team;
+//import edu.neu.coe.info6205.util.Team;
 
 public class Main {
 
@@ -30,10 +30,10 @@ public class Main {
 			Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
 			for (CSVRecord record : records) {
 				if(!(Main.teamData.containsKey(record.get("HomeTeam"))))
-					Main.teamData.put(record.get("HomeTeam"), new Team(record.get("HomeTeam")));
+					Main.teamData.put(record.get("HomeTeam"), new TeamRecord(record.get("HomeTeam")));
 
 				if(!(Main.teamData.	containsKey(record.get("AwayTeam"))))
-					Main.teamData.put(record.get("AwayTeam"), new Team(record.get("AwayTeam")));
+					Main.teamData.put(record.get("AwayTeam"), new TeamRecord(record.get("AwayTeam")));
 
 				Main.teamData.get(record.get("HomeTeam")).setHomeGoals(Integer.parseInt(record.get("HomeGoals")));
 				Main.teamData.get(record.get("HomeTeam")).setHomeGoalsAgainst(Integer.parseInt(record.get("AwayGoals")));
