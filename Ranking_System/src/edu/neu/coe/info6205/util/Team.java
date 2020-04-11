@@ -8,6 +8,10 @@ public class Team {
 	private int awayGoals;
 	private int homeGoalsAgainst;
 	private int awayGoalsAgainst;
+	private double homeAttackStrength;
+	private double awayAttackStrength;
+	private double homeDefenseStrength;
+	private double awayDefenseStrength;
 
 	public Team() {
 		// TODO Auto-generated constructor stub
@@ -22,6 +26,10 @@ public class Team {
 		this.awayGoals = 0;
 		this.homeGoalsAgainst = 0;
 		this.awayGoalsAgainst = 0;
+		this.homeAttackStrength = 0.0f;
+		this.awayAttackStrength = 0.0f;
+		this.homeDefenseStrength = 0.0f;
+		this.awayDefenseStrength = 0.0f;
 	}
 
 	public int getHomeMatchesPlayed() {
@@ -80,4 +88,23 @@ public class Team {
 		this.teamName = teamName;
 	}
 
+	public double calculateHomeAttackStrength(double avgHomeTeamGoals,double avgHomeLeague)
+	{
+		return this.homeAttackStrength = avgHomeTeamGoals/avgHomeLeague;
+	}
+
+	public double calculateHomeDefenseStrength(double avgGoalsConcededHT,double avgHomeLeage)
+	{
+		return this.homeDefenseStrength = avgGoalsConcededHT/avgHomeLeage;
+	}
+
+	public double calculateAwayAttackStrength(double avgAwayTeamGoals,double avgAwayLeague)
+	{
+		return this.awayAttackStrength = avgAwayTeamGoals/avgAwayLeague;
+	}
+
+	public double calculateAwayDefenseStrength(double avgGoalsConcededAT,double avgAwayLeague)
+	{
+		return this.awayDefenseStrength = avgGoalsConcededAT/avgAwayLeague;
+	}
 }
