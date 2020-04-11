@@ -1,4 +1,4 @@
-package edu.neu.coe.info6205.util;
+package edu.neu.coe.info6205.application;
 
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -12,7 +12,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
-import edu.neu.coe.info6205.application.SeasonStatistics;
+import edu.neu.coe.info6205.util.Team;
 
 public class Main {
 
