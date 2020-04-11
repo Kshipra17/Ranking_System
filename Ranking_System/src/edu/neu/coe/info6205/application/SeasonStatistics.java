@@ -27,23 +27,23 @@ public class SeasonStatistics {
 		super();
 		this.numberOfTeams = numberOfTeams;
 		
-		this.averageHomeGamesPlayed = 0;
+		this.averageHomeGamesPlayed = 0.0f;
 		this.totalHomeGoalsConceded= 0;
 		this.totalHomeMatchesPlayed = 0;
 		this.totalHomeGoalsScored = 0;
-		this.averageOfHomeGoalsAverage = 0;
-		this.averageofGoalsConcededByHomeTeams = 0;
-		this.averageOfGoalsConcededByHomeTeamAverage = 0;
-		this.averageHomeGoalsLeague = 0;
+		this.averageOfHomeGoalsAverage = 0.0f;
+		this.averageofGoalsConcededByHomeTeams = 0.0f;
+		this.averageOfGoalsConcededByHomeTeamAverage = 0.0f;
+		this.averageHomeGoalsLeague = 0.0f;
 		
 		this.averageAwayGamesPlayed = 0;
 		this.totalAwayGoalsConceded = 0;
 		this.totalAwayMatchesPlayed = 0 ;
 		this.averageAwayGoalsLeague = 0;
 		this.totalAwayGoalsScored = 0;
-		this.averageOfAwayGoalsAverage = 0 ;
-		this.averageofGoalsConcededByAwayTeams = 0;
-		this.averageOfGoalsConcededByAwayTeamAverage = 0;
+		this.averageOfAwayGoalsAverage = 0.0f ;
+		this.averageofGoalsConcededByAwayTeams = 0.0f;
+		this.averageOfGoalsConcededByAwayTeamAverage = 0.0f;
 	}
 
 
@@ -203,4 +203,22 @@ public class SeasonStatistics {
 		this.averageOfGoalsConcededByAwayTeamAverage = avgGoalConcededAwatTeam;
 	}
 
+
+	@Override
+	public String toString() {
+		return "SeasonStatistics [numberOfTeams=" + numberOfTeams + ", totalHomeMatchesPlayed=" + totalHomeMatchesPlayed
+				+ ", averageHomeGoalsLeague=" + averageHomeGoalsLeague + ", totalHomeGoalsScored="
+				+ totalHomeGoalsScored + ", totalHomeGoalsConceded=" + totalHomeGoalsConceded
+				+ ", averageOfHomeGoalsAverage=" + averageOfHomeGoalsAverage + ", averageofGoalsConcededByHomeTeams="
+				+ averageofGoalsConcededByHomeTeams + ", averageOfGoalsConcededByHomeTeamAverage="
+				+ averageOfGoalsConcededByHomeTeamAverage + ", averageHomeGamesPlayed=" + averageHomeGamesPlayed
+				+ ", totalAwayMatchesPlayed=" + totalAwayMatchesPlayed + ", averageAwayGoalsLeague="
+				+ averageAwayGoalsLeague + ", totalAwayGoalsScored=" + totalAwayGoalsScored
+				+ ", totalAwayGoalsConceded=" + totalAwayGoalsConceded + ", averageOfAwayGoalsAverage="
+				+ averageOfAwayGoalsAverage + ", averageofGoalsConcededByAwayTeams=" + averageofGoalsConcededByAwayTeams
+				+ ", averageOfGoalsConcededByAwayTeamAverage=" + averageOfGoalsConcededByAwayTeamAverage
+				+ ", averageAwayGamesPlayed=" + averageAwayGamesPlayed + "]";
+	}
+
+	
 }

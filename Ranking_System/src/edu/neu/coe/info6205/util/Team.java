@@ -88,7 +88,7 @@ public class Team {
 		this.teamName = teamName;
 	}
 
-	public double calculateHomeAttackStrength(double avgHomeTeamGoals,double avgHomeLeague)
+	public  double  calculateHomeAttackStrength(double avgHomeTeamGoals,double avgHomeLeague)
 	{
 		return this.homeAttackStrength = avgHomeTeamGoals/avgHomeLeague;
 	}
