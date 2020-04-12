@@ -38,6 +38,4 @@ public interface Team {
 	public void setTeamName(String teamName);
 	
 	public int updateCurrentPoints(int points);
-	
-
 }

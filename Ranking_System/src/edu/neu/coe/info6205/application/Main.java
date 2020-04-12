@@ -22,7 +22,9 @@ public class Main {
 		double sumofAvgAwayGoalScored = 0;
 
 
+		AbstractPredictionModel predictionModelObj = new PredictionModel();
 		SeasonStatistics seasonStatObj = new SeasonStatistics(20);
+		
 		try {
 			Reader in = new FileReader(".\\EPL_Data\\Season2019-20.csv");
 			Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
@@ -126,6 +128,7 @@ public class Main {
 			e.printStackTrace();
 		}
 
+		predictionModelObj.calculateWinningProbability(predictionModelObj.calculateExpectedHomeTeamGoals(1.5, 2.0, 1.8), predictionModelObj.calculateExpectedAwayTeamGoals(0.97, 0.85, 1.2));
 	}
 
 }
