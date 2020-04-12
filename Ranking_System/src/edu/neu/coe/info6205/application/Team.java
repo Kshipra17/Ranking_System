@@ -36,5 +36,8 @@ public interface Team {
 	public String getTeamName();
 
 	public void setTeamName(String teamName);
+	
+	public int updateCurrentPoints(int points);
+	
 
 }

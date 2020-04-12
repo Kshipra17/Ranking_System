@@ -14,10 +14,6 @@ public class TeamRecord implements Team{
 	private double homeDefenseStrength;
 	private double awayDefenseStrength;
 
-	public TeamRecord() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public TeamRecord(String teamName) {
 		super();
 		this.teamName = teamName;
@@ -89,24 +85,26 @@ public class TeamRecord implements Team{
 		this.teamName = teamName;
 	}
 
-	public  double  calculateHomeAttackStrength(double avgHomeTeamGoals,double avgHomeLeague)
-	{
+	public  double  calculateHomeAttackStrength(double avgHomeTeamGoals,double avgHomeLeague) {
 		return this.homeAttackStrength = avgHomeTeamGoals/avgHomeLeague;
 	}
 
-	public double calculateHomeDefenseStrength(double avgGoalsConcededHT,double avgHomeLeage)
-	{
+	public double calculateHomeDefenseStrength(double avgGoalsConcededHT,double avgHomeLeage) {
 		return this.homeDefenseStrength = avgGoalsConcededHT/avgHomeLeage;
 	}
 
-	public double calculateAwayAttackStrength(double avgAwayTeamGoals,double avgAwayLeague)
-	{
+	public double calculateAwayAttackStrength(double avgAwayTeamGoals,double avgAwayLeague) {
 		return this.awayAttackStrength = avgAwayTeamGoals/avgAwayLeague;
 	}
 
-	public double calculateAwayDefenseStrength(double avgGoalsConcededAT,double avgAwayLeague)
-	{
+	public double calculateAwayDefenseStrength(double avgGoalsConcededAT,double avgAwayLeague) {
 		return this.awayDefenseStrength = avgGoalsConcededAT/avgAwayLeague;
 	}
+
+	@Override
+	public int updateCurrentPoints(int points) {
+		return 0;
+	}
+	
 	
 }

@@ -12,8 +12,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
-//import edu.neu.coe.info6205.util.Team;
-
 public class Main {
 
 	private static HashMap<String, Team> teamData = new HashMap<String, Team>();
