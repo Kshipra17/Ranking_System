@@ -26,12 +26,13 @@ public class Main {
 	private static final String currentRankingCsv = ".\\EPL_Data\\Current_Ranking_EPL.csv";
 	SeasonStatistics seasonStatObj = null;
 	AbstractPredictionModel predictionModelObj = null;
-
+	AbstractTeamFactory teamFactoryObj = null;
 
 	public Main(int numberOfTeams) {
 		super();
 		predictionModelObj = new PredictionModel();
 		seasonStatObj = new SeasonStatistics(numberOfTeams);
+		teamFactoryObj = TeamFactory.getInstance();
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -40,9 +41,14 @@ public class Main {
 		mainObj.createIndividualTeamData();
 		mainObj.makeTeamStatCsvData(teamStatCsv);
 		mainObj.makeAttackDefenseStrengthData(attackDefenseStrengthCsv);
-		mainObj.predictRemainingMatches(inputMatchCsv);
 		mainObj.updateTeamPointsFromCSV(currentRankingCsv);
-
+		mainObj.predictRemainingMatches(inputMatchCsv);
+		
+		for (Entry<String, Team> entry : Main.teamData.entrySet()) {
+			
+			System.out.println(entry.getValue().getTeamName()+entry.getValue().getCurrentPoints());
+		}
+		
 	}
 
 	public void predictRemainingMatches(String csvName) throws IOException
@@ -83,6 +89,7 @@ public class Main {
 					//updateCurrentTeamStatistics(teamType);
 				}
 			}
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -171,10 +178,10 @@ public class Main {
 		Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
 		for (CSVRecord record : records) {
 			if(!(Main.teamData.containsKey(record.get("HomeTeam"))))
-				Main.teamData.put(record.get("HomeTeam"), new TeamRecord(record.get("HomeTeam")));
+				Main.teamData.put(record.get("HomeTeam"), teamFactoryObj.getObject(record.get("HomeTeam")));
 
 			if(!(Main.teamData.	containsKey(record.get("AwayTeam"))))
-				Main.teamData.put(record.get("AwayTeam"), new TeamRecord(record.get("AwayTeam")));
+				Main.teamData.put(record.get("AwayTeam"), teamFactoryObj.getObject(record.get("AwayTeam")));
 
 			Main.teamData.get(record.get("HomeTeam")).setHomeGoals(Integer.parseInt(record.get("HomeGoals")));
 			Main.teamData.get(record.get("HomeTeam")).setHomeGoalsAgainst(Integer.parseInt(record.get("AwayGoals")));
