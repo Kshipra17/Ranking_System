@@ -13,6 +13,11 @@ public class TeamRecord implements Team{
 	private double awayAttackStrength;
 	private double homeDefenseStrength;
 	private double awayDefenseStrength;
+	private double avgGoalsScoredHT;
+	private double avgGoalsConcededHT;
+	private double avgGoalsScoredAT;
+	private double avgGoalsConcededAT;
+	
 
 	public TeamRecord(String teamName) {
 		super();
@@ -27,6 +32,42 @@ public class TeamRecord implements Team{
 		this.awayAttackStrength = 0.0f;
 		this.homeDefenseStrength = 0.0f;
 		this.awayDefenseStrength = 0.0f;
+		this.avgGoalsScoredHT = 0.0f;
+		this.avgGoalsConcededHT = 0.0f;
+		this.avgGoalsScoredAT = 0.0f;
+		this.avgGoalsConcededAT = 0.0f;
+	}
+
+	public double getAvgGoalsScoredHT() {
+		return avgGoalsScoredHT;
+	}
+
+	public void setAvgGoalsScoredHT(double avgGoalsScoredHT) {
+		this.avgGoalsScoredHT = avgGoalsScoredHT;
+	}
+
+	public double getAvgGoalsConcededHT() {
+		return avgGoalsConcededHT;
+	}
+
+	public void setAvgGoalsConcededHT(double avgGoalsConcededHT) {
+		this.avgGoalsConcededHT = avgGoalsConcededHT;
+	}
+
+	public double getAvgGoalsScoredAT() {
+		return avgGoalsScoredAT;
+	}
+
+	public void setAvgGoalsScoredAT(double avgGoalsScoredAT) {
+		this.avgGoalsScoredAT = avgGoalsScoredAT;
+	}
+
+	public double getAvgGoalsConcededAT() {
+		return avgGoalsConcededAT;
+	}
+
+	public void setAvgGoalsConcededAT(double avgGoalsConcededAT) {
+		this.avgGoalsConcededAT = avgGoalsConcededAT;
 	}
 
 	public int getHomeMatchesPlayed() {
@@ -86,21 +127,46 @@ public class TeamRecord implements Team{
 	}
 
 	public  double  calculateHomeAttackStrength(double avgHomeTeamGoals,double avgHomeLeague) {
-		return this.homeAttackStrength = avgHomeTeamGoals/avgHomeLeague;
+		this.homeAttackStrength = avgHomeTeamGoals/avgHomeLeague;
+		return homeAttackStrength;
 	}
 
 	public double calculateHomeDefenseStrength(double avgGoalsConcededHT,double avgHomeLeage) {
-		return this.homeDefenseStrength = avgGoalsConcededHT/avgHomeLeage;
+		this.homeDefenseStrength = avgGoalsConcededHT/avgHomeLeage;
+		return homeDefenseStrength;
 	}
 
 	public double calculateAwayAttackStrength(double avgAwayTeamGoals,double avgAwayLeague) {
-		return this.awayAttackStrength = avgAwayTeamGoals/avgAwayLeague;
+		this.awayAttackStrength = avgAwayTeamGoals/avgAwayLeague;
+		return awayAttackStrength;
 	}
 
 	public double calculateAwayDefenseStrength(double avgGoalsConcededAT,double avgAwayLeague) {
-		return this.awayDefenseStrength = avgGoalsConcededAT/avgAwayLeague;
+		 this.awayDefenseStrength = avgGoalsConcededAT/avgAwayLeague;
+		 return awayDefenseStrength;
 	}
 
+	
+	public double getHomeAttackStrength() {
+		return this.homeAttackStrength;
+	}
+
+
+	public double getAwayAttackStrength() {
+		return this.awayAttackStrength;
+	}
+
+	
+	public double getHomeDefenseStrength() {
+		return this.homeDefenseStrength;
+	}
+
+	
+	public double getAwayDefenseStrength() {
+		return this.awayDefenseStrength;
+	}
+
+	
 	@Override
 	public int updateCurrentPoints(int points) {
 		return 0;

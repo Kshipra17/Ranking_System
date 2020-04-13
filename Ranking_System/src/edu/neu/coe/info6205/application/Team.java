@@ -38,4 +38,36 @@ public interface Team {
 	public void setTeamName(String teamName);
 	
 	public int updateCurrentPoints(int points);
+	
+	public double getAvgGoalsScoredHT();
+		
+	public void setAvgGoalsScoredHT(double avgGoalsScoredHT) ;
+
+	public double getAvgGoalsConcededHT();
+
+	public void setAvgGoalsConcededHT(double avgGoalsConcededHT);
+
+	public double getAvgGoalsScoredAT();
+	
+	public void setAvgGoalsScoredAT(double avgGoalsScoredAT);
+
+	public double getAvgGoalsConcededAT() ;
+	
+	public void setAvgGoalsConcededAT(double avgGoalsConcededAT);
+
+	public double getHomeAttackStrength();
+
+//	public void setHomeAttackStrength(double homeAttackStrength);
+
+	public double getAwayAttackStrength();
+
+//	public void setAwayAttackStrength(double awayAttackStrength);
+
+	public double getHomeDefenseStrength();
+
+//	public void setHomeDefenseStrength(double homeDefenseStrength) ;
+
+	public double getAwayDefenseStrength();
+
+//	public void setAwayDefenseStrength(double awayDefenseStrength);
 }
