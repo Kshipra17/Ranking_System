@@ -3,6 +3,7 @@ package edu.neu.coe.info6205.application;
 public class TeamRecord implements Team{
 
 	private String teamName;
+	private int currentPoints;
 	private int homeMatchesPlayed;
 	private int awayMatchesPlayed;
 	private int homeGoals;
@@ -36,6 +37,7 @@ public class TeamRecord implements Team{
 		this.avgGoalsConcededHT = 0.0f;
 		this.avgGoalsScoredAT = 0.0f;
 		this.avgGoalsConcededAT = 0.0f;
+		this.currentPoints = 0;
 	}
 
 	public double getAvgGoalsScoredHT() {
@@ -165,11 +167,14 @@ public class TeamRecord implements Team{
 	public double getAwayDefenseStrength() {
 		return this.awayDefenseStrength;
 	}
-
 	
 	@Override
-	public int updateCurrentPoints(int points) {
-		return 0;
+	public void updateCurrentPoints(int points) {
+		 this.currentPoints += points;
+	}
+	
+	public int getCurrentPoints() {
+		return this.currentPoints;
 	}
 	
 	
