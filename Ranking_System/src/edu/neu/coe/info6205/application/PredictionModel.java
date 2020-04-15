@@ -43,7 +43,7 @@ public class PredictionModel extends AbstractPredictionModel{
 
 	public void predictHomeAwayGoals(double homeGoalExpectancy, double awayGoalExpectancy) {
 
-		System.out.println("Home Goal ex"+homeGoalExpectancy+"away Goal Expec" + awayGoalExpectancy);
+//		System.out.println("Home Goal ex"+homeGoalExpectancy+"away Goal Expec" + awayGoalExpectancy);
 		
 		double[][] poissonProbMatrix = new double[5][5];
 		double[] sumAwayTeamProb = new double[5];
@@ -56,7 +56,7 @@ public class PredictionModel extends AbstractPredictionModel{
 			for(int homeScore = 0; homeScore<poissonProbMatrix[awayScore].length;homeScore++) {
 				poissonProbMatrix[awayScore][homeScore] = poissonDistAwayObj.probability(awayScore) * poissonDistHomeObj.probability(homeScore) *100;//Implied probability
 				sumAwayTeamProb[awayScore] += poissonProbMatrix[awayScore][homeScore] ; //Summing columns ex arr[0][0]+arr[0][1]+arr[1][0]+arr[1][1]
-				System.out.println(" index[homeScore] "+homeScore+" index[awayScore] "+ awayScore+" matrix "+poissonProbMatrix[awayScore][homeScore]);
+		//		System.out.println(" index[homeScore] "+homeScore+" index[awayScore] "+ awayScore+" matrix "+poissonProbMatrix[awayScore][homeScore]);
 			}
 		}
 
@@ -74,7 +74,7 @@ public class PredictionModel extends AbstractPredictionModel{
 
 		this.predictedHomeGoals = PredictionModel.getMaxValueIndex(sumHomeTeamProb);
 		this.predictedAwayGoals = PredictionModel.getMaxValueIndex(sumAwayTeamProb);
-		System.out.println("Home team max prob ofscoring " +predictedHomeGoals+" goals" + " Away Team has max prob of scoring " +predictedAwayGoals+" goals");
+	//	System.out.println("Home team max prob ofscoring " +predictedHomeGoals+" goals" + " Away Team has max prob of scoring " +predictedAwayGoals+" goals");
 	 
 		
 		//If its a draw then what 1-1?????

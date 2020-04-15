@@ -10,9 +10,8 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.*;
+
 
 public class Main {
 
@@ -43,12 +42,12 @@ public class Main {
 		mainObj.makeAttackDefenseStrengthData(attackDefenseStrengthCsv);
 		mainObj.updateTeamPointsFromCSV(currentRankingCsv);
 		mainObj.predictRemainingMatches(inputMatchCsv);
-		
+
 		for (Entry<String, Team> entry : Main.teamData.entrySet()) {
-			
-			System.out.println(entry.getValue().getTeamName()+entry.getValue().getCurrentPoints());
+
+			System.out.println(entry.toString());
 		}
-		
+
 	}
 
 	public void predictRemainingMatches(String csvName) throws IOException
@@ -74,7 +73,7 @@ public class Main {
 
 					int homePredictedGoals =  predictionModelObj.getPredictedHomeGoals();
 					int awayPredictedGoals =  predictionModelObj.getPredictedAwayGoals();
-					
+
 					if(homePredictedGoals > awayPredictedGoals) {
 						teamData.get(record.get("HomeTeam")).updateCurrentPoints(3);    //home team wins
 					}
@@ -86,10 +85,12 @@ public class Main {
 						teamData.get(record.get("HomeTeam")).updateCurrentPoints(1);
 					}
 
-					//updateCurrentTeamStatistics(teamType);
+					/////////////////////updateCurrentTeamStatistics
+
+					updateCurrentTeamStatistics(record,homePredictedGoals,awayPredictedGoals);
 				}
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -111,45 +112,29 @@ public class Main {
 
 	public void makeTeamStatCsvData(String csvName) throws IOException
 	{
-		double sumofAvgHomeGoalScored = 0;
-		double sumofAvgHomeGoalConceded = 0;
-		double sumofAvgAwayGoalScored = 0;
-
-		for (Entry<String, Team> entry : Main.teamData.entrySet()) {
-			sumofAvgHomeGoalScored += entry.getValue().getAvgGoalsScoredHT();
-			sumofAvgHomeGoalConceded += entry.getValue().getAvgGoalsConcededHT();
-			sumofAvgAwayGoalScored += entry.getValue().getAvgGoalsScoredAT();
-		}
-
-		seasonStatObj.setAverageOfHomeGoalsAverage(sumofAvgHomeGoalScored); 
-		seasonStatObj.setAverageOfGoalsConcededByHomeTeamAverage(sumofAvgHomeGoalConceded);
 		seasonStatObj.setTotalHomeGoalsConceded();//***********dependency  TBD
 		seasonStatObj.setAverageofGoalsConcededByHomeTeams();//***********dependency TBD
-		seasonStatObj.setAverageHomeGamesPlayed();
 		seasonStatObj.setAverageHomeGoalsLeague();	
 
-		seasonStatObj.setAverageOfAwayGoalsAverage(sumofAvgAwayGoalScored);
-		seasonStatObj.setAverageAwayGamesPlayed();//TBD
 		seasonStatObj.setAverageAwayGoalsLeague();
 		seasonStatObj.setAverageofGoalsConcededByAwayTeams(seasonStatObj.getAverageHomeGoalsLeague());
-		seasonStatObj.setAverageOfGoalsConcededByAwayTeamAverage(seasonStatObj.getAverageOfHomeGoalsAverage());
 
 		BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvName));
 
 		CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-				.withHeader("Avg Home Matches Played", "Home Goal Avg", "Avg Home Goal Avg",
-						"Avg Home Goals Conceded", "Avg Home Goals Conceded Avg","Avg Away Matches Played", 
-						"Away Goal Avg", "Avg Away Goal Avg","Avg Away Goal Conceded", "Avg Away Goals Conceded Avg"));
-		csvPrinter.printRecord(seasonStatObj.getAverageHomeGamesPlayed(),seasonStatObj.getAverageHomeGoalsLeague(),
-				seasonStatObj.getAverageOfHomeGoalsAverage(),seasonStatObj.getAverageofGoalsConcededByHomeTeams(),
-				seasonStatObj.getAverageOfGoalsConcededByHomeTeamAverage(),seasonStatObj.getAverageAwayGamesPlayed(),
-				seasonStatObj.getAverageAwayGoalsLeague(),seasonStatObj.getAverageOfAwayGoalsAverage(),
-				seasonStatObj.getAverageofGoalsConcededByAwayTeams(),seasonStatObj.getAverageOfGoalsConcededByAwayTeamAverage());
+				.withHeader( "Home Goal Avg",
+						"Avg Home Goals Conceded", 
+						"Away Goal Avg","Avg Away Goal Conceded"));
+		csvPrinter.printRecord(seasonStatObj.getAverageHomeGoalsLeague(),
+				seasonStatObj.getAverageofGoalsConcededByHomeTeams(),
+				seasonStatObj.getAverageAwayGoalsLeague(),
+				seasonStatObj.getAverageofGoalsConcededByAwayTeams());
+		
 		csvPrinter.flush();
 		csvPrinter.close();
 	}
 
-	
+
 	public void makeAttackDefenseStrengthData(String csvName) throws IOException
 	{
 		BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvName));
@@ -161,10 +146,10 @@ public class Main {
 		for (Entry<String, Team> entry : Main.teamData.entrySet()) {
 
 			csvPrinter.printRecord(entry.getKey(),entry.getValue().calculateHomeAttackStrength(entry.getValue().getAvgGoalsScoredHT()
-					, seasonStatObj.getAverageHomeGoalsLeague()),entry.getValue().calculateHomeDefenseStrength(entry.getValue().getAvgGoalsConcededHT()
-							, seasonStatObj.getAverageHomeGoalsLeague()),entry.getValue().calculateAwayAttackStrength(entry.getValue().getAvgGoalsScoredAT()
+					, seasonStatObj.getAverageOfHomeGoalsAverage()),entry.getValue().calculateHomeDefenseStrength(entry.getValue().getAvgGoalsConcededHT()
+							, seasonStatObj.getAverageofGoalsConcededByHomeTeams()),entry.getValue().calculateAwayAttackStrength(entry.getValue().getAvgGoalsScoredAT()
 									, seasonStatObj.getAverageAwayGoalsLeague()),entry.getValue().calculateAwayDefenseStrength(entry.getValue().getAvgGoalsConcededAT()
-											, seasonStatObj.getAverageAwayGoalsLeague()));
+											, seasonStatObj.getAverageofGoalsConcededByAwayTeams()));
 		}
 
 		csvPrinter.flush();
@@ -229,14 +214,56 @@ public class Main {
 		}
 	}
 
-	public void updateCurrentTeamStatistics(String teamType)
+	public void updateCurrentTeamStatistics(CSVRecord record,int homePredictedGoals, int awayPredictedGoals)
 	{
-		if(teamType == "HomeTeam") {
+		
+		teamData.get(record.get("HomeTeam")).setHomeMatchesPlayed(1);//for individual team
+		teamData.get(record.get("AwayTeam")).setAwayMatchesPlayed(1);//for individual team
 
-		}
-		else {
+		teamData.get(record.get("HomeTeam")).setHomeGoals(homePredictedGoals);
+		teamData.get(record.get("HomeTeam")).setHomeGoalsAgainst(awayPredictedGoals);
 
-		}
+		teamData.get(record.get("AwayTeam")).setAwayGoals(awayPredictedGoals);
+		teamData.get(record.get("AwayTeam")).setAwayGoalsAgainst(homePredictedGoals);
+
+		seasonStatObj.setTotalHomeMatchesPlayed(1);//total home teams
+		seasonStatObj.setTotalAwayMatchesPlayed(1);
+
+		seasonStatObj.setTotalHomeGoalsScored(homePredictedGoals);
+		seasonStatObj.setTotalAwayGoalsScored(awayPredictedGoals);
+		seasonStatObj.setTotalAwayGoalsConceded();//=totalHome Goals scored
+		seasonStatObj.setTotalHomeGoalsConceded();//==awayGoalsScored
+
+		seasonStatObj.setAverageAwayGoalsLeague();
+		seasonStatObj.setAverageHomeGoalsLeague();
+		seasonStatObj.setAverageofGoalsConcededByHomeTeams();
+		seasonStatObj.setAverageofGoalsConcededByAwayTeams(seasonStatObj.getAverageHomeGoalsLeague());
+		
+		//Home attack strength
+		int homeGoalsScored = teamData.get(record.get("HomeTeam")).getHomeGoals();
+		int homeMatchesPlayed = teamData.get(record.get("HomeTeam")).getHomeMatchesPlayed();
+		teamData.get(record.get("HomeTeam")).setAvgGoalsScoredHT((double)homeGoalsScored/homeMatchesPlayed);
+		teamData.get(record.get("HomeTeam")).calculateHomeAttackStrength
+		(teamData.get(record.get("HomeTeam")).getAvgGoalsScoredHT(), seasonStatObj.getAverageHomeGoalsLeague());
+
+		//Home defense strength
+		int homeGoalsConceded = teamData.get(record.get("HomeTeam")).getHomeGoalsAgainst();
+		teamData.get(record.get("HomeTeam")).setAvgGoalsConcededHT((double)homeGoalsConceded/homeMatchesPlayed);
+		teamData.get(record.get("HomeTeam")).calculateHomeDefenseStrength
+		(teamData.get(record.get("HomeTeam")).getAvgGoalsConcededHT(), seasonStatObj.getAverageofGoalsConcededByHomeTeams());
+
+		//Away Attack Strength
+		int awayGoalsScored =   teamData.get(record.get("AwayTeam")).getAwayGoals();
+		int awayMatchesPlayed = teamData.get(record.get("AwayTeam")).getAwayMatchesPlayed();
+		teamData.get(record.get("AwayTeam")).setAvgGoalsScoredAT((double)awayGoalsScored/awayMatchesPlayed);
+		teamData.get(record.get("AwayTeam")).calculateAwayAttackStrength
+		(teamData.get(record.get("AwayTeam")).getAvgGoalsScoredAT(), seasonStatObj.getAverageAwayGoalsLeague());
+
+		//Away Defense Strength
+		teamData.get(record.get("AwayTeam")).setAvgGoalsConcededAT((double)homeGoalsConceded/awayMatchesPlayed);
+		teamData.get(record.get("AwayTeam")).calculateAwayAttackStrength
+		(teamData.get(record.get("AwayTeam")).getAvgGoalsConcededAT(), seasonStatObj.getAverageofGoalsConcededByAwayTeams());
+
 
 	}
 }

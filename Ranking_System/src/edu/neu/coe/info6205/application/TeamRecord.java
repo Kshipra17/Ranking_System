@@ -176,6 +176,15 @@ public class TeamRecord implements Team{
 	public int getCurrentPoints() {
 		return this.currentPoints;
 	}
+
+	@Override
+	public String toString() {
+		return "TeamRecord [teamName=" + teamName + ", currentPoints=" + currentPoints + ", homeMatchesPlayed="
+				+ homeMatchesPlayed + ", awayMatchesPlayed=" + awayMatchesPlayed + ", homeGoals=" + homeGoals
+				+ ", awayGoals=" + awayGoals + ", homeAttackStrength=" + homeAttackStrength + ", awayAttackStrength="
+				+ awayAttackStrength + ", homeDefenseStrength=" + homeDefenseStrength + ", awayDefenseStrength="
+				+ awayDefenseStrength + "]";
+	}
 	
 	
 	

@@ -10,62 +10,30 @@ public class SeasonStatistics {
 	private int totalHomeGoalsConceded;
 	private double averageOfHomeGoalsAverage ;
 	private double averageofGoalsConcededByHomeTeams;
-	private double averageOfGoalsConcededByHomeTeamAverage;
-	private double averageHomeGamesPlayed;
 	
 	private int totalAwayMatchesPlayed;
 	private double averageAwayGoalsLeague;
 	private int totalAwayGoalsScored;
 	private int totalAwayGoalsConceded;
-	private double averageOfAwayGoalsAverage ;
 	private double averageofGoalsConcededByAwayTeams;
-	private double averageOfGoalsConcededByAwayTeamAverage;
-	private double averageAwayGamesPlayed;
 	
 
 	public SeasonStatistics(int numberOfTeams) {
 		super();
 		this.numberOfTeams = numberOfTeams;
 		
-		this.averageHomeGamesPlayed = 0.0f;
 		this.totalHomeGoalsConceded= 0;
 		this.totalHomeMatchesPlayed = 0;
 		this.totalHomeGoalsScored = 0;
-		this.averageOfHomeGoalsAverage = 0.0f;
 		this.averageofGoalsConcededByHomeTeams = 0.0f;
-		this.averageOfGoalsConcededByHomeTeamAverage = 0.0f;
 		this.averageHomeGoalsLeague = 0.0f;
 		
-		this.averageAwayGamesPlayed = 0;
 		this.totalAwayGoalsConceded = 0;
 		this.totalAwayMatchesPlayed = 0 ;
 		this.averageAwayGoalsLeague = 0;
 		this.totalAwayGoalsScored = 0;
-		this.averageOfAwayGoalsAverage = 0.0f ;
 		this.averageofGoalsConcededByAwayTeams = 0.0f;
-		this.averageOfGoalsConcededByAwayTeamAverage = 0.0f;
 	}
-
-
-	public double getAverageHomeGamesPlayed() {
-		return averageHomeGamesPlayed;
-	}
-
-
-	public void setAverageHomeGamesPlayed() {
-		this.averageHomeGamesPlayed = this.totalHomeMatchesPlayed/this.numberOfTeams;
-	}
-
-
-	public double getAverageAwayGamesPlayed() {
-		return averageAwayGamesPlayed;
-	}
-
-
-	public void setAverageAwayGamesPlayed() {
-		this.averageAwayGamesPlayed = this.totalAwayMatchesPlayed/this.numberOfTeams;
-	}
-
 
 	public int getTotalHomeGoalsConceded() {
 		return totalHomeGoalsConceded;
@@ -102,7 +70,7 @@ public class SeasonStatistics {
 
 
 	public void setAverageHomeGoalsLeague() {
-		this.averageHomeGoalsLeague = this.totalHomeGoalsScored/this.totalHomeMatchesPlayed;
+		this.averageHomeGoalsLeague = (double)this.totalHomeGoalsScored/this.totalHomeMatchesPlayed;
 	}
 
 
@@ -121,9 +89,6 @@ public class SeasonStatistics {
 	}
 
 
-	public void setAverageOfHomeGoalsAverage(double sumOfIndividualTeamAvg) {
-		this.averageOfHomeGoalsAverage = sumOfIndividualTeamAvg/this.numberOfTeams;
-	}
 
 
 	public double getAverageofGoalsConcededByHomeTeams() {
@@ -131,19 +96,9 @@ public class SeasonStatistics {
 	}
 
 	public void setAverageofGoalsConcededByHomeTeams() {
-		this.averageofGoalsConcededByHomeTeams = this.totalHomeGoalsConceded/this.totalHomeMatchesPlayed;
+		this.averageofGoalsConcededByHomeTeams = (double)this.totalHomeGoalsConceded/this.totalHomeMatchesPlayed;
 	}
 		
-	public double getAverageOfGoalsConcededByHomeTeamAverage() {
-		return averageOfGoalsConcededByHomeTeamAverage;
-	}
-
-
-	public void setAverageOfGoalsConcededByHomeTeamAverage(double sumOfIndividualAvg) {
-		this.averageOfGoalsConcededByHomeTeamAverage = sumOfIndividualAvg/this.numberOfTeams;
-	}
-
-
 	public int getTotalAwayMatchesPlayed() {
 		return totalAwayMatchesPlayed;
 	}
@@ -160,7 +115,7 @@ public class SeasonStatistics {
 
 
 	public void setAverageAwayGoalsLeague() {
-		this.averageAwayGoalsLeague = this.totalAwayGoalsScored/this.totalAwayMatchesPlayed;
+		this.averageAwayGoalsLeague = (double)this.totalAwayGoalsScored/this.totalHomeMatchesPlayed;
 	}
 
 
@@ -174,16 +129,6 @@ public class SeasonStatistics {
 	}
 
 
-	public double getAverageOfAwayGoalsAverage() {
-		return averageOfAwayGoalsAverage;
-	}
-
-
-	public void setAverageOfAwayGoalsAverage(double sumOfIndividualAvg) {
-		this.averageOfAwayGoalsAverage = sumOfIndividualAvg/this.numberOfTeams;
-	}
-
-
 	public double getAverageofGoalsConcededByAwayTeams() {
 		return averageofGoalsConcededByAwayTeams;
 	}
@@ -193,32 +138,4 @@ public class SeasonStatistics {
 		this.averageofGoalsConcededByAwayTeams = totalAwayGoalsConceded;
 	}
 
-
-	public double getAverageOfGoalsConcededByAwayTeamAverage() {
-		return averageOfGoalsConcededByAwayTeamAverage;
-	}	
-
-
-	public void setAverageOfGoalsConcededByAwayTeamAverage(double avgGoalConcededAwatTeam) {
-		this.averageOfGoalsConcededByAwayTeamAverage = avgGoalConcededAwatTeam;
-	}
-
-
-	@Override
-	public String toString() {
-		return "SeasonStatistics [numberOfTeams=" + numberOfTeams + ", totalHomeMatchesPlayed=" + totalHomeMatchesPlayed
-				+ ", averageHomeGoalsLeague=" + averageHomeGoalsLeague + ", totalHomeGoalsScored="
-				+ totalHomeGoalsScored + ", totalHomeGoalsConceded=" + totalHomeGoalsConceded
-				+ ", averageOfHomeGoalsAverage=" + averageOfHomeGoalsAverage + ", averageofGoalsConcededByHomeTeams="
-				+ averageofGoalsConcededByHomeTeams + ", averageOfGoalsConcededByHomeTeamAverage="
-				+ averageOfGoalsConcededByHomeTeamAverage + ", averageHomeGamesPlayed=" + averageHomeGamesPlayed
-				+ ", totalAwayMatchesPlayed=" + totalAwayMatchesPlayed + ", averageAwayGoalsLeague="
-				+ averageAwayGoalsLeague + ", totalAwayGoalsScored=" + totalAwayGoalsScored
-				+ ", totalAwayGoalsConceded=" + totalAwayGoalsConceded + ", averageOfAwayGoalsAverage="
-				+ averageOfAwayGoalsAverage + ", averageofGoalsConcededByAwayTeams=" + averageofGoalsConcededByAwayTeams
-				+ ", averageOfGoalsConcededByAwayTeamAverage=" + averageOfGoalsConcededByAwayTeamAverage
-				+ ", averageAwayGamesPlayed=" + averageAwayGamesPlayed + "]";
-	}
-
-	
 }
