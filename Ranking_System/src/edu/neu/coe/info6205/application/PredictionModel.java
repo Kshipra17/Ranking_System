@@ -2,12 +2,25 @@ package edu.neu.coe.info6205.application;
 
 import org.apache.commons.math3.distribution.PoissonDistribution;
 
+/**
+ * 
+ * @author NANDAN1393
+ *The class serves a the design for preduction model 
+ */
+
 public class PredictionModel extends AbstractPredictionModel{
 
 	private double expectedHomeTeamGoals;
 	private double expectedAwayTeamGoals;
 	private int predictedHomeGoals;
 	private int predictedAwayGoals;
+	
+	/**
+	 * @Fun PredictionModel
+	 * @param None
+	 * @Des Constructor to get the prediction model instance
+	 * @return None
+	 */
 
 	public PredictionModel() {
 		super();
@@ -17,29 +30,79 @@ public class PredictionModel extends AbstractPredictionModel{
 		this.predictedAwayGoals = 0;
 	}
 	
+	/**
+	 * @Fun getPredictedHomeGoals
+	 * @param None
+	 * @Des Get the predicted home goals
+	 * @return predictedHomeGoals
+	 */
+	
 	public int getPredictedHomeGoals() {
 		return predictedHomeGoals;
 	}
+	
+	/**
+	 * @Fun getPredictedAwayGoals
+	 * @param None
+	 * @Des Get the predicted away goals
+	 * @return predictedAwayGoals
+	 */
 
 	public int getPredictedAwayGoals() {
 		return predictedAwayGoals;
 	}
+	
+	/**
+	 * @Fun getExpectedHomeTeamGoals
+	 * @param None
+	 * @Des Get expected home team goals
+	 * @return expectedHomeTeamGoals
+	 */
 
 	public double getExpectedHomeTeamGoals() {
 		return expectedHomeTeamGoals;
 	}
+	
+	/**
+	 * @Fun getExpectedAwayTeamGoals
+	 * @param None
+	 * @Des Get expected away team's goal
+	 * @return expectedAwayTeamGoals
+	 */
+	
 
 	public double getExpectedAwayTeamGoals() {
 		return expectedAwayTeamGoals;
 	}
+	
+	/**
+	 * @Fun calculateExpectedHomeTeamGoals
+	 * @param HomeTeamAttackStrength, awayTeamDefenceStrength, avgHomeGoals
+	 * @Des Calculate home team's expected goals
+	 * @return None
+	 */
 
 	public void calculateExpectedHomeTeamGoals(double HomeTeamAttackStrength, double awayTeamDefenceStrength, double avgHomeGoals) {
 		 this.expectedHomeTeamGoals = HomeTeamAttackStrength * awayTeamDefenceStrength * avgHomeGoals;
 	}
+	
+	/**
+	 * @Fun calculateExpectedAwayTeamGoals
+	 * @param AwayTeamAttackStrength, homeTeamDefenceStrength, avgAwayGoals
+	 * @Des Calculate away team's expected goals
+	 * @return None
+	 */
 
 	public void calculateExpectedAwayTeamGoals(double AwayTeamAttackStrength, double homeTeamDefenceStrength, double avgAwayGoals) {
 		 this.expectedAwayTeamGoals = AwayTeamAttackStrength * homeTeamDefenceStrength * avgAwayGoals;
 	}
+	
+	/**
+	 * @Fun predictHomeAwayGoals
+	 * @param homeGoalExpectancy, awayGoalExpectancy
+	 * @Des Predict goal expectancy matrix of home/away team
+	 * @return None
+	 */
 
 	public void predictHomeAwayGoals(double homeGoalExpectancy, double awayGoalExpectancy) {
 
