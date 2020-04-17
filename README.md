@@ -7,6 +7,10 @@ The aim is to Predict outcome of remaining matches and rank the teams based on t
 after playing the entire season.
 A flexible model is designed that can be used for any game/season
 
+# Technologies Used
+
+Java, Java Swing
+
 # Maven
 Add this dependency to your project's POM.xml
 ```bash
