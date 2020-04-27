@@ -139,8 +139,6 @@ public class PredictionModel extends AbstractPredictionModel{
 		this.predictedAwayGoals = PredictionModel.getMaxValueIndex(sumAwayTeamProb);
 	//	System.out.println("Home team max prob ofscoring " +predictedHomeGoals+" goals" + " Away Team has max prob of scoring " +predictedAwayGoals+" goals");
 	 
-		
-		//If its a draw then what 1-1?????
 	}
 
 	private static int getMaxValueIndex(double[] arr) {
